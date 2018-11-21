@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> book/search_result.html</title>
+</head>
+<body>
+you searched book for <strong>{{ query}}</strong> <br>
+
+{% if books %}
+{% for book in books %}
+<li>
+	{{ book.title }}
+</li>
+{% endfor %}
+{% else %}
+Cannot find any similiar book<p>
+{% endif %}
+
+</body>
+</html>
