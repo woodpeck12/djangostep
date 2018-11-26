@@ -1,3 +1,5 @@
 # djangostep
 
-https://djangobook.com/django-forms/
+https://djangobook.com/tying-forms-views/
+
+https://kivy.org/

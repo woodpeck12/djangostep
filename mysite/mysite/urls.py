@@ -16,14 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
-from .views import hello,current_time,time_plus
-
+#from .views import hello,current_time,time_plus,contact,contact_thanks
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/',hello),
-    path('current_time/',current_time),
-    path('time/plus/<int:plus>/',time_plus),
+    path('hello/',views.hello),
+    path('current_time/',views.current_time),
+    path('time/plus/<int:plus>/',views.time_plus),
     path('',include('books.urls')),
+    path('contact/',views.contact),
+    path('contact/thanks/',views.contact_thanks),
 ]
 
