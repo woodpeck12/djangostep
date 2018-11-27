@@ -17,5 +17,5 @@ def search(request):
 			errors.append('Please enter at most 20 characters.')
 		else:
 			books = Book.objects.filter(title__icontains=q)
-			return render(request, 'book/search_result.html', {'books': books, 'query': q})
+			return render(request, 'book/search_results.html', {'books': books, 'query': q})
 	return render(request, 'book/search_form.html', {'errors': errors})

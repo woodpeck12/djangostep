@@ -1,8 +1,9 @@
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template.loader import get_template
 from django.shortcuts import render
 import datetime
-
+from .forms import ContactForm
+from django.core.mail import send_mail, get_connection
 
 def hello(request):
 	#print('now',datetime.datetime.now())
@@ -28,3 +29,26 @@ def time_plus(request,plus):
 	result = datetime.datetime.now() + datetime.timedelta(hours=plus)
 	#result=datetime.timedelta(hours=plus)
 	return HttpResponse(result)
+
+def contact(request):
+	if request.method == 'POST':
+		form = ContactForm(request.POST)
+		if form.is_valid():
+			cd = form.cleaned_data
+			con = get_connection('django.core.mail.backends.console.EmailBackend')
+			send_mail(cd['subject'],
+				      cd['message'],
+				      cd.get('email','noreply@example.com'),
+				      ['siteowner@example.com'],
+				      connection=con
+				      )
+			return HttpResponseRedirect('/contact/thanks/')
+	else:
+		form = ContactForm(
+				initial = {'subject':'initial subject'}
+			)
+
+	return render(request,'contact_form.html',{'form':form})	
+
+def contact_thanks(request):
+	return HttpResponse('Thanks')

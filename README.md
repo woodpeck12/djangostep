@@ -1,5 +1,5 @@
 # djangostep
 
-https://djangobook.com/tying-forms-views/
+https://djangobook.com/advanced-templates/
 
 https://kivy.org/
